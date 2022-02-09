@@ -44,9 +44,8 @@ exports.run = async(client, message, args) => {
             .addField("__**SteamCMD:**__", "Rust \nDaystodie \nArma \nAssettocorsa \nAvorion \nBarotrauma", true)
             .addField("__**Databases:**__", "MongoDB \nRedis \nPostgres", true)
             .addField("__**WebHosting:**__", "Nginx", true)
-            .addField("__**Custom Egg:**__", "ShareX", true)
-            .addField("__**Software:**__", "codeserver \nGitea", true)
-//             .addField("__**Storage:**__", "storage", true)
+            .addField("__**Custom Eggs:**__", "ShareX", true)
+            .addField("__**Software:**__", "codeserver \ngitea \nhaste", true)
             .setFooter("Example: DBH!server create-donator NodeJS Testing Server"))
         return;
     }
@@ -85,7 +84,8 @@ exports.run = async(client, message, args) => {
         spigot: pServerCreatesettings.spigot,
         sharex: pServerCreatesettings.sharex,
         codeserver: pServerCreatesettings.codeserver,
-        gitea: pServerCreatesettings.gitea
+        gitea: pServerCreatesettings.gitea,
+        haste: pServerCreatesettings.haste
     }
 
     if (Object.keys(types).includes(args[1].toLowerCase())) {

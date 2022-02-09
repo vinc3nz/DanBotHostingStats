@@ -37,7 +37,7 @@ exports.run = async (client, message, args) => {
         };
 
         if (!/^[a-zA-Z0-9.-]+$/.test(args[1]) || args[1].length > 253) { //Check the provided domain is a valid domain
-            return message.channel.send('That is not a valid domain! \nExample of domains:\nValid: danbot.host\nInvalid: https://danbot.host/')
+            return message.channel.send('That is not a valid domain! \nExample of domains:\nValid: danbot.host\nInvalid: <https://danbot.host/>')
         };
 
         const dnsCheck = await new Promise((res, rej) => {
@@ -46,14 +46,14 @@ exports.run = async (client, message, args) => {
                 family: 4,
                 hints: dns.ADDRCONFIG | dns.V4MAPPED,
             };
-            
+
             dns.lookup(args[1], options, (err, address, family) =>
                 res({err, address, family})
             );
         });
 
         if(dnsCheck.address != "164.132.74.251"){
-            return message.channel.send('ERROR: You must have a DNS A Record pointing to \`164.132.74.251\`! Also if you are using Cloudflare make sure the you are using DNS Only mode!\nIf you have done all of that and it\'s still not working: Try again later, because sometimes DNS changes can take a whie to update. (Can take up to 24 hours to update!)')
+            return message.channel.send('ERROR: You must have a DNS A Record pointing to \`164.132.74.251\`! Also if you are using Cloudflare make sure the you are using DNS Only mode!\nIf you have done all of that and it\'s still not working: Try again later, because sometimes DNS changes can take a while to update. (Can take up to 24 hours to update!)')
         };
 
         config.proxy.authKey = await getNewKey();
@@ -171,7 +171,7 @@ exports.run = async (client, message, args) => {
                         })
 
                     } else if (ErrorAfterProxy == "Error: Request failed with status code 400") { // Domain Already linked and/or other error
-                        message.reply('This domain has already been linked. If this is an error, please contact an Admin!')
+                        message.reply('This domain has already been linked. If this is an error, please contact a staff member to fix this!')
                     }
                 })
 

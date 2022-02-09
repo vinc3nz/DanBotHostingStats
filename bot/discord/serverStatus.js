@@ -11,17 +11,26 @@ let nstatus = {
     }, {
         name: 'Node 4 ',
         data: 'Node4'
+    },  {
+        name: 'Node 5 ',
+        data: 'Node5'
     }, {
         name: 'Node 8 ',
         data: 'Node8'
+    }, {
+        name: 'Node 13 ',
+        data: 'Node13'
     }],
 
     "Donator Nodes": [{
-        name: 'Node 15',
-        data: 'node15'
-    }, {
         name: 'Dono-01',
         data: 'dono01'
+    }, {
+        name: 'Dono-02',
+        data: 'dono02'
+    }, {
+        name: 'Dono-03',
+        data: 'dono03'
     }],
 
     "Panel": [{
@@ -33,8 +42,11 @@ let nstatus = {
     }],
 
     "VPS Hosting Servers": [{
-        name: 'Server 1',
-        data: 'vps-server-01'
+        name: 'France 1',
+        data: 'vpsfrance-1'
+    }, {
+        name: 'Canada 1',
+        data: 'vpscanada-1'
     }],
 
     "Misc": [{
@@ -58,9 +70,10 @@ let parse = async() => {
 
             let da = nodeStatus.get(d.data.toLowerCase());
             let nodeData = nodeServers.get(d.data.toLowerCase());
-            let serverUsage = d.data.toLowerCase().includes('node') ? `(${(nodeData == null || nodeData.servers == null) ? 'N/A' : nodeData.servers} / 1200)` : '' || d.data.toLowerCase().includes('dono') ? `(${(nodeData == null || nodeData.servers == null) ? 'N/A' : nodeData.servers} / 600)` : '' || d.data.toLowerCase().includes('node-8') ? `(${(nodeData == null || nodeData.servers == null) ? 'N/A' : nodeData.servers} / 600)` : ''
+            let ping = nodePing.fetch(d.data.toLowerCase())
+            let serverUsage = d.data.toLowerCase().includes('node') ? `(${(nodeData == null || nodeData.servers == null) ? 'N/A' : nodeData.servers} / 1200) [\`${Math.round(ping.ping)}ms\`]` : '' || d.data.toLowerCase().includes('dono') ? `(${(nodeData == null || nodeData.servers == null) ? 'N/A' : nodeData.servers} / 800) [\`${Math.round(ping.ping)}ms\`]` : '' || d.data.toLowerCase().includes('node-8') ? `(${(nodeData == null || nodeData.servers == null) ? 'N/A' : nodeData.servers} / 600) [\`${Math.round(ping.ping)}ms\`]` : ''
 
-            da = (da.status === true ? (`🟢 Online ${serverUsage}`) : ((da.is_vm_online == null ? "🔴 **Offline**" : ((da.is_vm_online === true ? "🟠 Wings" : "🔴 **System**") + ` offline ${serverUsage}`))))
+            da = (da.maintenance === true ? (`🟣 Maintenance Mode!`) : da.status === true ? (`🟢 Online ${serverUsage}`) : ((da.is_vm_online == null ? "🔴 **Offline**" : ((da.is_vm_online === true ? "🟠 Wings" : "🔴 **System**") + ` offline ${serverUsage}`))))
 
             temp.push(`**${d.name}:** ${da}`)
         }
