@@ -14,6 +14,7 @@ exports.run = async(client, message, args) => {
         .addField("__**Custom Eggs:**__", "ShareX", true)
         .addField("__**Software:**__", "codeserver \ngitea \nhaste", true)
 //         .addField("__**Storage:**__", "storage", true)
+        .addField("Help", "If you need more informations about a servertype, use \`DBH!server type <server type>\`.", true)
         .setFooter("Example: DBH!server create NodeJS Testing Server")
 
     const serverName = message.content.split(' ').slice(3).join(' ') || "change me! (Settings -> SERVER NAME)";
