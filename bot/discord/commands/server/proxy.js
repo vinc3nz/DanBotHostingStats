@@ -41,17 +41,18 @@ exports.run = async (client, message, args) => {
         .setDescription('`' + config.DiscordBot.Prefix + 'server proxy <domain> <serverid>`' +
             '\nMake sure to replace <domain> with your domain and <serverid> with the ID of your server. ' +
             'You can find your server id by running `' + config.DiscordBot.Prefix + 'server list`' +
-            '\nYou can link your own domain by creating a DNS A Record pointing either \`164.132.74.251\` or \`192.95.42.75\`! ' +
+            '\nYou can link your own domain by creating a DNS A Record pointing either \`164.132.74.251\` (Proxy server located in France) or \`192.95.42.75\` (Proxy server located in Canada)! ' +
             'If you are using Cloudflare make sure the you are using DNS Only mode!' +
             '\nOr you can use the free Danbot Host domains:' +
-            '\n `*.never-gonna-give-you-up.xyz' +
+            '\n`*.never-gonna-give-you-up.xyz' +
             '\n*.never-gonna-let-you-down.xyz' +
             '\n*.never-gonna-make-you-cry.xyz' +
             '\n*.never-gonna-run-around-and-desert-you.xyz' +
             '\n*.never-gonna-say-goodbye.xyz' +
             '\n*.never-gonna-tell-a-lie-and-hurt-you.xyz' +
             '\n*.rick-roll.xyz`' +
-            '\nFor donators there is also the domain `*.only-fans.club`.')
+            '\nFor donators there is also the domain `*.only-fans.club`.' +
+            '\nTo proxy a domain from DBH, make sure to include a subdomain. Example: \`DBH!server proxy 63bs7 blue-bot.rick-roll.xyz\`.')
     if (!args[1] || !args[2]) {
         await message.channel.send(embed)
     } else {
@@ -82,7 +83,7 @@ exports.run = async (client, message, args) => {
         });
 
         if(dnsCheck.address != ("164.132.74.251", "192.95.42.75")){
-            return message.channel.send('ERROR: You must have a DNS A Record pointing to \`164.132.74.251\` or \`192.95.42.75\`! Also if you are using Cloudflare make sure the you are using DNS Only mode!\nIf you have done all of that and it\'s still not working: Try again later, because sometimes DNS changes can take a while to update. (Can take up to 24 hours to update!)')
+            return message.channel.send('ERROR: You must have a DNS A Record pointing to \`164.132.74.251\` or \`192.95.42.75\`! Also if you are using Cloudflare make sure that you are using DNS Only mode!\nIf you have done all of the steps described in \`DBH!server proxy\` and it\'s still not working: Set TTL at your DNS to 1 minute or try again later, because sometimes DNS changes can take a while to update (up to 24 hours).')
         };
 
         config.FRProxy.authKey = await getNewKeyFR();
@@ -167,7 +168,7 @@ exports.run = async (client, message, args) => {
                         }
                     }).then(ResponseAfterProxy => {
                         //console.log(chalk.blue('DEBUG: ' + chalk.white(ResponseAfterProxy))
-                        message.reply("Domain has been proxied, It's ID is: " + ResponseAfterProxy.data.id)
+                        message.reply("Domain has been proxied at France location. It's ID is: " + ResponseAfterProxy.data.id)
                         let datalmao = userData.get(message.author.id).domains || []
                         userData.set(message.author.id + '.domains', [...new Set(datalmao), {
                             domain: args[1].toLowerCase(),
@@ -242,7 +243,7 @@ exports.run = async (client, message, args) => {
                         }
                     }).then(ResponseAfterProxy => {
                         //console.log(chalk.blue('DEBUG: ' + chalk.white(ResponseAfterProxy))
-                        message.reply("Domain has been proxied, It's ID is: " + ResponseAfterProxy.data.id)
+                        message.reply("Domain has been proxied at Canada location. It's ID is: " + ResponseAfterProxy.data.id)
                         let datalmao = userData.get(message.author.id).domains || []
                         userData.set(message.author.id + '.domains', [...new Set(datalmao), {
                             domain: args[1].toLowerCase(),
