@@ -31,7 +31,6 @@ exports.run = async (client, message, args) => {
                 ].join("\n"));
             msg.edit("Your servers:")
             msg.edit(embed)
-            message.channel.send(embed);
         }, 1000);
     }).catch(() => { });
 };
