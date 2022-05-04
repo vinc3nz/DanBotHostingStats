@@ -2,7 +2,7 @@ const serverCreateSettings = require('../../../../createData');
 exports.run = async(client, message, args) => {
 
     let helpEmbed = new Discord.MessageEmbed()
-        .setColor("RED").setDescription(`List of servers: (use DBH!server create <type> <name>)\n\n*Please note that some nodes might be having trouble connecting to the bot which may lead into this process giving out an error.*\n`)
+        .setColor("RED").setDescription(`List of servers:\n`)
         //.addField("__**Minecraft:**__", "Forge \nPaper \nBedrock \nPocketmineMP \nWaterfall \nSpigot", true)
         //.addField("__**Grand Theft Auto:**__", "alt:V \nmultitheftauto \nRage.MP \nSA-MP", true)
         .addField("__**Bots:**__", "NodeJS \nPython \nJava \naio \nRedDiscordBot", true)
@@ -14,8 +14,7 @@ exports.run = async(client, message, args) => {
         .addField("__**Custom Eggs:**__", "ShareX", true)
         .addField("__**Software:**__", "codeserver \ngitea \nhaste", true)
 //         .addField("__**Storage:**__", "storage", true)
-        .addField("Help", "If you need more informations about a servertype, use \`DBH!server type <server type>\`.", true)
-        .setFooter("Example: DBH!server create NodeJS Testing Server")
+        .setFooter("Example: DBH!server type NodeJS")
 
 
     if (!args[1]) {
@@ -29,7 +28,7 @@ exports.run = async(client, message, args) => {
     }
 
     const embed = new Discord.MessageEmbed();
-    switch(args[1]) {
+    switch(args[1].toLowerCase()) {
        case "aio":
          embed.setDescription("`All In One`, short `aio` is a unique server type that contains several features that distinguish it from other Development(Bot & Codeserver) server types. This type brings all of the other types in a 1 single type and lets user interact with console. [Source: docs.dbh.wtf](https://docs.dbh.wtf)");
          break;
@@ -47,8 +46,21 @@ exports.run = async(client, message, args) => {
        case "gitea":
          embed.setDescription("Gitea is an open-source forge software package for hosting software development version control using Git as well as other collaborative features like bug tracking, wikis and code review. It supports self-hosting but also provides a free public first-party instance. It is a fork of Gogs and is written in Go. [Source: Wikipedia](https://en.wikipedia.org/wiki/Gitea)")
          break;
+       case "sharex":
+         embed.setDescription("ShareX is an image-sharing-server with Discord Integration.")
+         break;
+       case "haste":
+         embed.setDescription("Haste is an open-source pastebin software written in node.js, which is easily installable in any network. It can be backed by either redis or filesystem, and has a very easy adapter interface for other stores. A publicly available version can be found at hastebin.com. [Source: Hastebin Github](https://github.com/toptal/haste)")
+         break;
+       case ("ts3" || "mumble"):
+         embed.setDescription("TeamSpeak3 and Mumble are voice-servers to communicate with friends")
+         break;
+       case ("mongodb" || "redis" || "postgres"):
+         embed.setDescription("Databases.")
+         break;
        default:
          return message.channel.send(helpEmbed)
          break;
     }
+    return message.channel.send(embed);
 }
