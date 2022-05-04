@@ -30,9 +30,25 @@ exports.run = async(client, message, args) => {
 
     const embed = new Discord.MessageEmbed();
     switch(args[1]) {
-       case "NodeJS":
-         embed.setDescription("Yep");
+       case "aio":
+         embed.setDescription("`All In One`, short `aio` is a unique server type that contains several features that distinguish it from other Development(Bot & Codeserver) server types. This type brings all of the other types in a 1 single type and lets user interact with console. [Source: docs.dbh.wtf](https://docs.dbh.wtf)");
          break;
-
+       case "nodejs":
+         embed.setDescription("`Node.js` is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting—running scripts server-side to produce dynamic web page content before the page is sent to the user's web browser. [Source: Wikipedia](https://en.wikipedia.org/wiki/Node.js)" +
+         "\n**If you are a starter, it is easier to use aio!**")
+         break;
+       case ("reddiscordbot" || "rdb"):
+         embed.setDescription("RedDiscordBot is an open-source Discord Bot written in Python. Many commands and functions can be added trough Discord." + 
+         "\nThe installation is easy, and you do NOT need to know anything about coding! Aside from installing and updating, every part of the bot can be controlled from within Discord. [Source: RedDiscordBot Github](https://github.com/Cog-Creators/Red-DiscordBot)")
+         break;
+       case "codeserver":
+         embed.setDescription("`codeserver` is a free and open-source IDE running in your web browser.")
+         break;
+       case "gitea":
+         embed.setDescription("Gitea is an open-source forge software package for hosting software development version control using Git as well as other collaborative features like bug tracking, wikis and code review. It supports self-hosting but also provides a free public first-party instance. It is a fork of Gogs and is written in Go. [Source: Wikipedia](https://en.wikipedia.org/wiki/Gitea)")
+         break;
+       default:
+         return message.channel.send(helpEmbed)
+         break;
     }
 }
