@@ -2,7 +2,7 @@ const axios = require('axios');
 const premiumNodes = [30, 31, 33, 34, 35];
 
 exports.run = async (client, message, args) => {
-    message.channel.send('Loading servers...');
+    var msg = message.channel.send('Loading servers...');
     var arr = [];
     let userid = args[1]?.match(/[0-9]{18}/)?.[0] || message.author.id;
     let user = userPrem.fetch(userid);
@@ -29,6 +29,8 @@ exports.run = async (client, message, args) => {
                     `- \`${arr.length - premiumServers}\` are **Free servers**`,
                     `- \`${premiumServers}\` are **Premium servers**`,
                 ].join("\n"));
+            msg.edit("Your servers:")
+            msg.edit(embed)
             message.channel.send(embed);
         }, 1000);
     }).catch(() => { });
