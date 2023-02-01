@@ -369,7 +369,7 @@ exports.run = async (client, message, args) => {
     });*/
 
   // New start
-  	axios.get("https://status.danbot.host/json/stats.json")
+  	axios.get("https://status-api.danbot.host/data")
         .then((response) => {
 	  //const res = response;
 	  /*if(err) {
@@ -386,13 +386,13 @@ exports.run = async (client, message, args) => {
           const newMsg = new MessageEmbed()
             .setTitle("Server stats")
             .setDescription("This command currently is on developement stage. If you dont see something here, it is broken.");
-          for(var i = 0; i < json.servers.length; i++) {
-	    if((json.servers[i].online6 == false && json.servers[i].online4 == false) || json.servers[i].memory_total == null) {
-		newMsg.addField(`${json.servers[i].name}`,`Offline`)
+          for(var i = 0; i < json.length; i++) {
+	    if((json.servers[i].online == false) {
+		newMsg.addField(`${json[i].servername}`,`Offline`)
 	    } else {
-            newMsg.addField(`${json.servers[i].name} (${json.servers[i].type}, ${json.servers[i].location})`, `CPU: ${json.servers[i].cpu}% ` +
-		`RAM: ${formatFileSize(json.servers[i].memory_used)} / ${formatFileSize(json.servers[i].memory_total, 1)} ` +
-		`Disk: ${formatFileSize(json.servers[i].hdd_used * 1000, 1)} / ${formatFileSize(json.servers[i].hdd_total * 1000, 1)}`, true)
+            newMsg.addField(`${json[i].servername}`, `CPU: ${json[i].cpuload}% ` +
+		`RAM: ${json[i].memused} / ${json[i].memtotal} ` +
+		`Disk: ${json[i].diskused} / ${json[i].disktotal}`, true)
 	    }
           }
           msg.edit({ embed: newMsg });
